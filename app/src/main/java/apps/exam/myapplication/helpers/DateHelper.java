@@ -13,9 +13,9 @@ import timber.log.Timber;
 public class DateHelper {
 
     public static Date getDate(String publishDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
         try {
-            return simpleDateFormat.parse(publishDate);
+            return simpleDateFormat.parse(publishDate.replace("Z", ""));
         } catch (ParseException e) {
             Timber.e(e);
         }
