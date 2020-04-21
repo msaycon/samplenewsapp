@@ -2,6 +2,8 @@ package apps.exam.myapplication.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,9 @@ public class MainFragment extends BaseFragment {
     @BindView(R.id.itemListView)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+
     @Override
     protected int layoutRes() {
         return R.layout.fragment_main;
@@ -71,11 +76,23 @@ public class MainFragment extends BaseFragment {
         });
 
         mMainViewModel.getError().observe(getViewLifecycleOwner(), isError -> {
-
+            if (isError != null) {
+                if (isError) {
+                    Toast.makeText(getActivity(), getString(R.string.error), Toast.LENGTH_SHORT).show();
+                }
+            }
         });
 
         mMainViewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
-
+            if (isLoading != null) {
+                if (isLoading) {
+                    mRecyclerView.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.VISIBLE);
+                } else {
+                    mProgressBar.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                }
+            }
         });
     }
 }

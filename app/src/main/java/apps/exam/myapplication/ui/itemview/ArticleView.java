@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.Comparator;
 import java.util.Date;
@@ -114,6 +115,7 @@ public class ArticleView implements IFlexible<ArticleView.ViewHolder> {
     public void bindViewHolder(FlexibleAdapter<IFlexible> adapter, ViewHolder holder, int position, List<Object> payloads) {
         Glide.with(holder.itemView.getContext())
                 .load(article.urlToImage)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(holder.contentImage);
 
         holder.title.setText(article.title);
