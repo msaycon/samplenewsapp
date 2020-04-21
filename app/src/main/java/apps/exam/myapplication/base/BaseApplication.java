@@ -21,7 +21,9 @@ public class BaseApplication extends DaggerApplication {
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent component = DaggerAppComponent.builder().application(this).build();
+        AppComponent component = DaggerAppComponent.builder()
+                .application(this)
+                .build();
         component.inject(this);
         return component;
     }

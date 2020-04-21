@@ -5,6 +5,8 @@ package apps.exam.myapplication.repository.data;
  */
 public class Article {
 
+    public Source source;
+
     public String title;
 
     public String description;
@@ -15,7 +17,8 @@ public class Article {
 
     public String publishedAt;
 
-    public Article(String title, String description, String url, String urlToImage, String publishedAt) {
+    public Article(Source source, String title, String description, String url, String urlToImage, String publishedAt) {
+        this.source = source;
         this.title = title;
         this.description = description;
         this.url = url;

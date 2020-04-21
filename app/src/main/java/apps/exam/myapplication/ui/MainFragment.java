@@ -54,6 +54,9 @@ public class MainFragment extends BaseFragment {
 
         setUpViews();
         initObservers();
+
+        mMainViewModel.getLocalHeadlines();
+        mMainViewModel.getRemoteHeadlines();
     }
 
     private void setUpViews() {
@@ -68,9 +71,13 @@ public class MainFragment extends BaseFragment {
                 Stream.stream(articles)
                         .forEach((Action1<Article>) value -> {
                             ArticleView articleView = new ArticleView(value);
-                            mAdapter.addItem(mAdapter.calculatePositionFor(articleView,
-                                    new ArticleView.ViewComparator()),
-                                    articleView);
+                            if (!mAdapter.contains(articleView)) {
+                                mAdapter.addItem(mAdapter.calculatePositionFor(articleView,
+                                        new ArticleView.ViewComparator()),
+                                        articleView);
+                            } else {
+                                mAdapter.updateItem(articleView);
+                            }
                         });
             }
         });

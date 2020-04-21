@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import apps.exam.myapplication.helpers.NetworkHelper;
 import apps.exam.myapplication.repository.retrofit.RepoService;
+import apps.exam.myapplication.repository.room.RoomData;
+import apps.exam.myapplication.repository.room.RoomDataImpl;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -31,5 +33,11 @@ public class AppModule {
     @Provides
     static RepoService provideRetrofitService(Retrofit retrofit) {
         return retrofit.create(RepoService.class);
+    }
+
+    @Singleton
+    @Provides
+    static RoomData provideRoomData(RoomDataImpl roomData) {
+        return roomData;
     }
 }

@@ -5,17 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 /**
  * Created by msaycon on 21,Apr,2020
  */
 public class DateHelper {
 
     public static Date getDate(String publishDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
         try {
             return simpleDateFormat.parse(publishDate);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return new Date(System.currentTimeMillis());
     }

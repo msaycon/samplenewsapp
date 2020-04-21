@@ -10,6 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import apps.exam.myapplication.R;
 import apps.exam.myapplication.helpers.DateHelper;
@@ -27,8 +28,29 @@ public class ArticleView implements IFlexible<ArticleView.ViewHolder> {
 
     public Article article;
 
+    public String uid;
+
     public ArticleView(Article article) {
         this.article = article;
+
+        if (article.source.id == null) {
+            this.uid = article.source.name.toLowerCase();
+        } else {
+            this.uid = article.source.id;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArticleView that = (ArticleView) o;
+        return uid.equals(that.uid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uid);
     }
 
     @Override
@@ -164,7 +186,6 @@ public class ArticleView implements IFlexible<ArticleView.ViewHolder> {
     }
 
     public static class ViewComparator implements Comparator<IFlexible> {
-
         @Override
         public int compare(IFlexible iFlexible, IFlexible t1) {
             ArticleView a1 = (ArticleView) iFlexible;
